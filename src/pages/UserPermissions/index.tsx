@@ -464,8 +464,8 @@ export default function UserPermission() {
       <div className="px-8 pt-3 pb-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 z-20 shrink-0">
           <div className="flex items-center gap-5">
               <div className="relative flex items-center justify-center group cursor-default shrink-0">
-                  <div className="absolute inset-0 bg-[#af7a2b] blur-[15px] opacity-20 rounded-full group-hover:opacity-60 transition-all duration-700"></div>
-                  <div className="relative z-10 p-1.5 border border-[#af7a2b]/40 rounded-xl bg-white/50 backdrop-blur-sm shadow-sm">
+                  <div className="absolute inset-0 bg-[#CC0000] blur-[15px] opacity-20 rounded-full group-hover:opacity-60 transition-all duration-700"></div>
+                  <div className="relative z-10 p-1.5 border border-[#CC0000]/40 rounded-xl bg-white/50 backdrop-blur-sm shadow-sm">
                       <Icons.ShieldCheck size={28} strokeWidth={2.5} className="text-[#CC0000]" />
                   </div>
               </div>
