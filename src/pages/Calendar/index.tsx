@@ -274,15 +274,13 @@ export default function CalendarHub() {
               </div>
           </div>
 
-          <div className="flex items-center gap-4">
-              <div className="bg-white/50 p-1.5 rounded-xl border border-white/60 shadow-inner flex items-center gap-1">
-                  <button onClick={() => setActiveTab('calendar')} className={`px-6 py-2.5 rounded-lg text-[11px] font-black uppercase tracking-widest transition-all flex items-center gap-2 ${activeTab === 'calendar' ? 'bg-white text-[#1f2a44] shadow-sm border border-[#cdd0db]' : 'text-[#7691ad] hover:text-[#1f2a44] border border-transparent'}`}>
-                    <LayoutGrid size={16} /> Calendar View
-                  </button>
-                  <button onClick={() => setActiveTab('list')} className={`px-6 py-2.5 rounded-lg text-[11px] font-black uppercase tracking-widest transition-all flex items-center gap-2 ${activeTab === 'list' ? 'bg-white text-[#1f2a44] shadow-sm border border-[#cdd0db]' : 'text-[#7691ad] hover:text-[#1f2a44] border border-transparent'}`}>
-                    <List size={16} /> List View
-                  </button>
-              </div>
+          <div className="flex bg-[#f8f9fa] border border-[#daecf3] p-1 rounded-full shadow-sm inline-flex">
+              <button onClick={() => setActiveTab('calendar')} className={`px-5 py-2 text-[11px] font-black uppercase tracking-widest rounded-full transition-all flex items-center gap-2 ${activeTab === 'calendar' ? 'bg-[#022d41] text-[#e7dedd] shadow-md' : 'text-[#a3c2d2] hover:text-[#f91a47]'}`}>
+                <LayoutGrid size={14} /> Calendar View
+              </button>
+              <button onClick={() => setActiveTab('list')} className={`px-5 py-2 text-[11px] font-black uppercase tracking-widest rounded-full transition-all flex items-center gap-2 ${activeTab === 'list' ? 'bg-[#022d41] text-[#e7dedd] shadow-md' : 'text-[#a3c2d2] hover:text-[#f91a47]'}`}>
+                <List size={14} /> List View
+              </button>
           </div>
       </div>
 
