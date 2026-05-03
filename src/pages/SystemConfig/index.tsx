@@ -544,7 +544,7 @@ export default function SystemConfig() {
                     </div>
 
                     {/* PAGINATION */}
-                    <div className="px-8 py-5 bg-[#f8f9fa] border-t border-[#daecf3] flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div className="px-8 py-3 bg-[#f8f9fa] border-t-[1.5px] border-slate-300 flex flex-col md:flex-row justify-between items-center gap-4">
                         <div className="flex items-center gap-6 text-[11px] font-black text-[#a3c2d2] uppercase tracking-widest">
                             <div className="flex items-center gap-3">
                                 <span>Display Rows:</span>

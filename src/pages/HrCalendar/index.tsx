@@ -212,7 +212,7 @@ export default function HrCalendar() {
                 <h2 className="text-[#141A26] font-black tracking-tighter text-2xl uppercase leading-none">
                     HR <span className="text-[#D91604]">CALENDAR</span>
                 </h2>
-                <p className="text-[#4F868C] text-[10px] font-bold mt-1 uppercase tracking-widest leading-none">HR Activities & Leave Planning</p>
+                <p className="text-[#4d5a44] text-[10px] font-bold mt-1 uppercase tracking-widest leading-none">HR Activities & Leave Planning</p>
             </div>
         </div>
 

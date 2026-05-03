@@ -316,7 +316,7 @@ export default function AccessLogs() {
                         </div>
                         <div className="flex items-center gap-1.5 mt-[6px]">
                             <div className="w-10 h-[2px] bg-[#af7a2b]"></div>
-                            <p className="text-[11px] font-medium text-[#a3c2d2] uppercase tracking-[0.2em] leading-none">
+                            <p className="text-[11px] font-bold text-[#4d5a44] uppercase tracking-[0.2em] mt-0.5 opacity-80 leading-none">
                                 SECURITY AUDIT & ACTIVITY TRACKING
                             </p>
                         </div>
@@ -333,9 +333,9 @@ export default function AccessLogs() {
                         <KpiCard label="Unique Users" value={uniqueUsers} icon={UserCheck} colorAccent={THEME.accent} colorValue={THEME.primary} desc="Active Identities" />
                     </div>
 
-                    <div className="bg-white rounded-3xl shadow-sm border border-[#daecf3]/60 overflow-hidden flex flex-col animate-fadeIn">
+                    <div className="bg-white rounded-2xl shadow-sm border border-[#daecf3]/60 overflow-hidden flex flex-col animate-fadeIn">
                         
-                        <div className="px-8 py-4 border-b border-[#daecf3] bg-white flex flex-col md:flex-row justify-between items-center gap-4 shrink-0">
+                        <div className="px-8 py-4 border-b border-[#daecf3] bg-[#f8f9fa] flex flex-col md:flex-row justify-between items-center gap-4 shrink-0">
                             <div className="flex items-center gap-3 w-full md:w-auto">
                                 <div className="relative">
                                     <button onClick={() => setFilterDropdownOpen(!filterDropdownOpen)} className="flex items-center gap-3 bg-[#f8f9fa] px-4 py-2.5 rounded-xl border border-[#daecf3] shadow-sm hover:border-[#af7a2b] hover:bg-white transition-all min-w-[180px]">
@@ -427,7 +427,7 @@ export default function AccessLogs() {
                             </table>
                         </div>
 
-                        <div className="px-8 py-3 bg-[#f8f9fa] border-t border-[#daecf3] flex flex-col md:flex-row justify-between items-center gap-4 shrink-0">
+                        <div className="px-8 py-3 bg-[#f8f9fa] border-t-[1.5px] border-slate-300 flex flex-col md:flex-row justify-between items-center gap-4 shrink-0">
                             <div className="flex items-center gap-6 text-[11px] font-black text-[#a3c2d2] uppercase tracking-widest">
                                 <div className="flex items-center gap-3">
                                     <span>Display Rows:</span>

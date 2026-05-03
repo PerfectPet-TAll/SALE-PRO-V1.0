@@ -550,7 +550,7 @@ export default function Home() {
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#214573] to-[#022d41]">STRATEGIC SALES HUB</span>
                         </h3>
                         {/* Compact Spacing between Title and Subtitle */}
-                        <p className="text-[9px] md:text-[10px] font-bold uppercase tracking-[0.25em] mt-1 opacity-90 leading-tight text-transparent bg-clip-text bg-gradient-to-r from-[#1aa6b7] to-[#398797]">
+                        <p className="text-[9px] md:text-[10px] font-bold uppercase tracking-[0.25em] mt-1 opacity-90 leading-tight text-[#4d5a44]">
                             OMNICHANNEL REVENUE TRACKING & CRM
                         </p>
                     </div>

@@ -31,7 +31,7 @@
   /* หัวข้อหน้าเพจหลัก (Header) */
   .sys-title-main { @apply text-[20px] md:text-[24px] font-black text-primary tracking-tight leading-none; }
   /* คำอธิบายใต้หัวข้อหน้าเพจ */
-  .sys-title-sub  { @apply text-[10px] md:text-[11px] font-medium text-slate-500 mt-0.5; }
+  .sys-title-sub  { @apply text-[10px] md:text-[11px] font-medium text-[#4d5a44] mt-0.5; }
 
   /* ไอคอนประจำหน้าใน Header (ปรับขนาดให้พอดีกับ 2 แถว: Title + Sub) */
   .sys-header-icon-box { @apply w-10 h-10 md:w-11 md:h-11 flex items-center justify-center rounded-xl bg-white shadow-sm border border-slate-100 shrink-0; }
