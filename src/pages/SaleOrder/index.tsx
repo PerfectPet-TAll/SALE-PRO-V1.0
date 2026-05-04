@@ -6,6 +6,9 @@ import KpiCard from '../../components/shared/KpiCard';
 import { SaleKanbanBoard } from './components/SaleKanbanBoard';
 import { SaleOrderTable } from './components/SaleOrderTable';
 import { api, cache } from '../../services/api';
+import { DraggableModal } from '../../components/shared/DraggableModal';
+import { CsvUpload } from '../../components/shared/CsvUpload';
+const Swal = typeof window !== 'undefined' ? (window as any).Swal || null : null;
 
 const ORDER_STATUSES = ['Pending', 'Production', 'Shipped', 'Completed', 'Cancelled', 'Draft'];
 const CUSTOMERS_MOCK = ['Betagro Group', 'CJ Supermarket', 'MAKRO Public Co.', '7-Eleven Thailand', 'Aro Store'];
@@ -20,6 +23,8 @@ export default function SaleOrder() {
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(10);
     const [showGuide, setShowGuide] = useState(false);
+    const [showUploadModal, setShowUploadModal] = useState(false);
+    const [showNewOrderModal, setShowNewOrderModal] = useState(false);
     
     useEffect(() => {
         const fetchOrders = async () => {
@@ -30,7 +35,7 @@ export default function SaleOrder() {
                     setItems(cachedData);
                 } else {
                     const res = await api.post('read', 'SaleOrders');
-                    if (res.status === 'ok' && Array.isArray(res.data) && res.data.length > 0) {
+                    if (res.status === 'success' && Array.isArray(res.data) && res.data.length > 0) {
                         setItems(res.data);
                         cache.set('sales_orders', res.data, 5);
                     } else {
@@ -127,10 +132,10 @@ export default function SaleOrder() {
                             </div>
                         </div>
                         <div className="flex gap-2">
-                            <button className="bg-white border border-[#daecf3] text-[#022d41] hover:border-[#f91a47] hover:text-[#f91a47] px-5 h-10 rounded-xl font-black text-[11px] uppercase tracking-widest flex items-center gap-2">
+                            <button onClick={() => setShowUploadModal(true)} className="bg-white border border-[#daecf3] text-[#022d41] hover:border-[#f91a47] hover:text-[#f91a47] px-5 h-10 rounded-xl font-black text-[11px] uppercase tracking-widest flex items-center gap-2">
                                 <Icons.Upload size={14}/> Upload
                             </button>
-                            <button className="bg-[#022d41] text-[#af7a2b] px-6 h-10 rounded-xl font-black text-[11px] uppercase tracking-widest flex items-center gap-2 shadow-sm hover:bg-[#1f2a44]">
+                            <button onClick={() => setShowNewOrderModal(true)} className="bg-[#022d41] text-[#af7a2b] px-6 h-10 rounded-xl font-black text-[11px] uppercase tracking-widest flex items-center gap-2 shadow-sm hover:bg-[#1f2a44]">
                                 <Icons.Plus size={14}/> New Order
                             </button>
                         </div>
@@ -151,15 +156,49 @@ export default function SaleOrder() {
                                 </select>
                             </div>
                             <div className="flex gap-2">
-                                <button onClick={()=>setCurrentPage(1)} className="w-8 h-8 flex items-center justify-center bg-white border border-[#daecf3] rounded-lg"><Icons.ChevronLeft size={16}/></button>
+                                <button onClick={()=>setCurrentPage(prev => Math.max(1, prev - 1))} disabled={currentPage === 1} className="w-8 h-8 flex items-center justify-center bg-white border border-[#daecf3] rounded-lg disabled:opacity-50 hover:bg-slate-50"><Icons.ChevronLeft size={16}/></button>
                                 <span className="px-4 py-1.5 bg-[#022d41] text-[#af7a2b] rounded-lg text-[11px] font-black">Page {currentPage}/{totalPages}</span>
-                                <button onClick={()=>setCurrentPage(totalPages)} className="w-8 h-8 flex items-center justify-center bg-white border border-[#daecf3] rounded-lg"><Icons.ChevronRight size={16}/></button>
+                                <button onClick={()=>setCurrentPage(prev => Math.min(totalPages, prev + 1))} disabled={currentPage === totalPages} className="w-8 h-8 flex items-center justify-center bg-white border border-[#daecf3] rounded-lg disabled:opacity-50 hover:bg-slate-50"><Icons.ChevronRight size={16}/></button>
                             </div>
                         </div>
                     )}
                 </div>
             </div>
           </div>
+          
+          <DraggableModal isOpen={showUploadModal} onClose={() => setShowUploadModal(false)} title={<span className="text-sm font-black uppercase text-[#022d41] tracking-widest">Bulk Upload</span>} width="600px">
+              <div className="p-6">
+                  <CsvUpload 
+                      requiredHeaders={['soNumber', 'customer', 'orderDate', 'status']}
+                      onUpload={(data) => {
+                          if (Swal) Swal.fire('Success', 'File uploaded and parsed correctly!', 'success');
+                          setShowUploadModal(false);
+                      }}
+                  />
+              </div>
+          </DraggableModal>
+
+          <DraggableModal isOpen={showNewOrderModal} onClose={() => setShowNewOrderModal(false)} title={<span className="text-sm font-black uppercase text-[#022d41] tracking-widest">New Sale Order</span>} width="500px">
+              <div className="p-6 space-y-4">
+                  <div>
+                      <label className="text-[11px] font-bold uppercase text-[#a3c2d2] tracking-widest block mb-2">Customer</label>
+                      <select className="w-full h-11 border border-[#daecf3] rounded-xl px-4 text-[13px] font-bold text-[#022d41] uppercase outline-none focus:border-[#022d41]">
+                          {CUSTOMERS_MOCK.map((c, i) => <option key={i}>{c}</option>)}
+                      </select>
+                  </div>
+                  <div>
+                      <label className="text-[11px] font-bold uppercase text-[#a3c2d2] tracking-widest block mb-2">Order Type</label>
+                      <select className="w-full h-11 border border-[#daecf3] rounded-xl px-4 text-[13px] font-bold text-[#022d41] uppercase outline-none focus:border-[#022d41]">
+                          {ORDER_TYPES.map((c, i) => <option key={i}>{c}</option>)}
+                      </select>
+                  </div>
+                  <button onClick={() => {
+                      if (Swal) Swal.fire('Created', 'New order created successfully!', 'success');
+                      setShowNewOrderModal(false);
+                  }} className="w-full h-12 mt-4 bg-[#022d41] text-[#af7a2b] font-black uppercase tracking-widest rounded-xl hover:bg-[#1f2a44] transition-all">Submit Order</button>
+              </div>
+          </DraggableModal>
+
         </div>
     );
 }

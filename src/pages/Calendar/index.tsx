@@ -256,7 +256,7 @@ export default function CalendarHub() {
       <UserGuidePanel isOpen={isGuideOpen} onClose={() => setIsGuideOpen(false)} />
 
       {/* HEADER SECTION */}
-      <div className="px-8 mt-5 flex items-center justify-between z-20 shrink-0">
+      <div className="px-8 pt-3 pb-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 z-20 shrink-0">
           <div className="flex items-center gap-5">
               <div className="relative flex items-center justify-center group cursor-default shrink-0">
                   <div className="absolute inset-0 bg-[#CC0000] blur-[15px] opacity-20 rounded-full group-hover:opacity-60 transition-all duration-700"></div>
@@ -284,11 +284,11 @@ export default function CalendarHub() {
           </div>
       </div>
 
-      <div className="px-8 mt-4 pb-6">
-        <div className="max-w-[1500px] w-full mx-auto space-y-5">
+      <div className="px-8 mt-2 pb-6">
+        <div className="max-w-[1500px] w-full mx-auto">
             
             {/* KPI STATS */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 shrink-0">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-5 shrink-0">
                 <KPICard title="Scheduled Tasks" val={filteredEvents.length} icon={Database} color={THEME.primaryLight} desc="Current View" />
                 <KPICard title="Critical Priorities" val={events.filter(e => e.priority === 'Critical').length} icon={AlertTriangle} color={THEME.danger} desc="Action Required" />
                 <KPICard title="Supplier Audits" val={events.filter(e => e.type === 'Audit').length} icon={ShieldCheck} color={THEME.accent} desc="Verification Node" />

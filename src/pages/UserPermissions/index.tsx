@@ -357,8 +357,61 @@ function EditUserModal({ isOpen, onClose, user, onSave }: any) {
                                     <input type="email" value={tempUser.email || ''} onChange={e => setTempUser({...tempUser, email: e.target.value})} className="w-full bg-[#f8f9fa] border border-[#daecf3] rounded-lg px-4 py-2 text-[12px] font-bold text-[#022d41] outline-none focus:border-[#af7a2b]" />
                                 </div>
                                 <div>
-                                    <label className="block text-[11px] font-black text-[#a3c2d2] uppercase tracking-widest mb-1.5">Avatar URL</label>
-                                    <input type="text" value={tempUser.avatar || ''} onChange={e => setTempUser({...tempUser, avatar: e.target.value})} className="w-full bg-[#f8f9fa] border border-[#daecf3] rounded-lg px-4 py-2 text-[12px] font-bold text-[#022d41] outline-none focus:border-[#af7a2b]" />
+                                    <label className="block text-[11px] font-black text-[#a3c2d2] uppercase tracking-widest mb-1.5">Profile Picture</label>
+                                    <div className="flex flex-col sm:flex-row items-center gap-3 w-full bg-white border border-[#daecf3] rounded-lg p-3">
+                                        <div className="w-16 h-16 rounded-xl bg-[#f8f9fa] border border-[#daecf3] flex items-center justify-center shadow-sm overflow-hidden shrink-0">
+                                            {tempUser.avatar ? (
+                                                <img src={tempUser.avatar} className="w-full h-full object-cover" alt="Avatar" />
+                                            ) : (
+                                                <Icons.User size={24} className="text-[#a3c2d2]" />
+                                            )}
+                                        </div>
+                                        <div className="flex-1 w-full space-y-2">
+                                            <div className="flex gap-2">
+                                                <button type="button" onClick={() => {
+                                                    const input = document.createElement('input');
+                                                    input.type = 'file';
+                                                    input.accept = 'image/*';
+                                                    input.onchange = (e: any) => {
+                                                        const file = e.target.files?.[0];
+                                                        if (file) {
+                                                            const reader = new FileReader();
+                                                            reader.onload = (ev) => {
+                                                                setTempUser({...tempUser, avatar: ev.target?.result as string});
+                                                            };
+                                                            reader.readAsDataURL(file);
+                                                        }
+                                                    };
+                                                    input.click();
+                                                }} className="bg-[#f8f9fa] border border-[#daecf3] text-[#022d41] hover:text-[#f91a47] hover:border-[#f91a47] py-1.5 px-3 rounded-lg text-[10px] uppercase font-black tracking-widest shadow-sm flex items-center gap-1.5 flex-1 justify-center transition-colors"><Icons.Upload size={12}/> Computer</button>
+
+                                                <button type="button" onClick={() => {
+                                                    const Swal = typeof window !== 'undefined' ? (window as any).Swal || null : null;
+                                                    if (Swal) {
+                                                        Swal.fire({
+                                                            title: 'Google Drive / URL',
+                                                            input: 'url',
+                                                            inputPlaceholder: 'Paste Image URL here...',
+                                                            inputAttributes: {
+                                                                autocapitalize: 'off'
+                                                            },
+                                                            showCancelButton: true,
+                                                            confirmButtonText: 'Preview',
+                                                            confirmButtonColor: '#022d41',
+                                                        }).then((result: any) => {
+                                                            if (result.isConfirmed && result.value) {
+                                                                setTempUser({...tempUser, avatar: result.value});
+                                                            }
+                                                        });
+                                                    } else {
+                                                        const url = prompt("Enter Google Drive Image URL or any URL");
+                                                        if (url) setTempUser({...tempUser, avatar: url});
+                                                    }
+                                                }} className="bg-[#f8f9fa] border border-[#daecf3] text-[#022d41] hover:text-[#f91a47] hover:border-[#f91a47] py-1.5 px-3 rounded-lg text-[10px] uppercase font-black tracking-widest shadow-sm flex items-center gap-1.5 flex-1 justify-center transition-colors"><Icons.Link size={12}/> URL / Drive</button>
+                                            </div>
+                                            <input type="text" value={tempUser.avatar || ''} onChange={e => setTempUser({...tempUser, avatar: e.target.value})} placeholder="Or paste image URL here..." className="w-full bg-[#f8f9fa] border border-[#daecf3] rounded border-dashed px-2 py-1.5 text-[10px] font-bold text-[#022d41] outline-none focus:border-[#af7a2b] transition-colors" />
+                                        </div>
+                                    </div>
                                 </div>
                                 <div className="flex items-center gap-3 pt-2">
                                     <input type="checkbox" checked={tempUser.isDev || false} onChange={e => setTempUser({...tempUser, isDev: e.target.checked})} className="w-4 h-4 accent-[#022d41] cursor-pointer" id="isDevCheck" />

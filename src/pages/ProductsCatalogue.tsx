@@ -33,7 +33,7 @@ export default function ProductsCatalogue() {
           setProducts(cachedData);
         } else {
           const res = await api.post('read', 'ProductsCatalogue');
-          if (res.status === 'ok' && Array.isArray(res.data) && res.data.length > 0) {
+          if (res.status === 'success' && Array.isArray(res.data) && res.data.length > 0) {
             setProducts(res.data);
             cache.set('products_catalogue', res.data, 5);
           } else {

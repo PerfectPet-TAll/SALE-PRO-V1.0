@@ -156,15 +156,15 @@
 }
 
 @layer utilities {
-  .custom-scrollbar::-webkit-scrollbar { height: 4px; width: 4px; }
+  .custom-scrollbar::-webkit-scrollbar { height: 6px; width: 6px; }
   .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-  .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
-  .custom-scrollbar:hover::-webkit-scrollbar-thumb { background: #94a3b8; }
+  .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, 0.08); border-radius: 10px; border: 2px solid transparent; background-clip: padding-box; }
+  .custom-scrollbar:hover::-webkit-scrollbar-thumb { background-color: rgba(0, 0, 0, 0.15); }
   
-  .kanban-scroll::-webkit-scrollbar { height: 4px; width: 4px; }
+  .kanban-scroll::-webkit-scrollbar { height: 6px; width: 6px; }
   .kanban-scroll::-webkit-scrollbar-track { background: transparent; }
-  .kanban-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
-  .kanban-scroll:hover::-webkit-scrollbar-thumb { background: #94a3b8; }
+  .kanban-scroll::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, 0.08); border-radius: 10px; border: 2px solid transparent; background-clip: padding-box; }
+  .kanban-scroll:hover::-webkit-scrollbar-thumb { background-color: rgba(0, 0, 0, 0.15); }
 }
 
 body {

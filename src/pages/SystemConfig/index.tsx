@@ -373,7 +373,7 @@ export default function SystemConfig() {
       <UserGuidePanel isOpen={isGuideOpen} onClose={() => setIsGuideOpen(false)} />
 
       {/* HEADER SECTION */}
-      <div className="px-8 py-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 z-20">
+      <div className="px-8 pt-3 pb-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 z-20 shrink-0">
           <div className="flex items-center gap-5">
               <div className="relative flex items-center justify-center group cursor-default shrink-0">
                   <div className="absolute inset-0 bg-[#CC0000] blur-[15px] opacity-20 rounded-full group-hover:opacity-60 transition-all duration-700"></div>
@@ -403,10 +403,10 @@ export default function SystemConfig() {
 
       {/* MAIN CONTENT AREA */}
       <div className="px-8 mt-2 pb-6">
-        <div className="max-w-[1500px] w-full mx-auto space-y-5">
+        <div className="max-w-[1500px] w-full mx-auto">
             
             {/* KPI STATS */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 shrink-0">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-5 shrink-0">
                 <KpiCard label="Total Records" value={filteredList.length} icon="Database" colorAccent={THEME.primaryLight} colorValue={THEME.primary} desc={`Active in ${activeTabData.label}`} />
                 <KpiCard label="System Node" value={activeTab.charAt(0).toUpperCase() + activeTab.slice(1, 5)} icon="LayoutGrid" colorAccent={THEME.accent} colorValue={THEME.primary} desc="Master Data Module" />
                 <KpiCard label="Last Modified" value="Now" icon="Clock" colorAccent={THEME.gold} colorValue={THEME.primary} desc={new Date().toLocaleTimeString()} />

@@ -302,7 +302,7 @@ export default function DevPermit() {
       <UserGuidePanel isOpen={isGuideOpen} onClose={() => setIsGuideOpen(false)} />
       <SaveConfirmModal isOpen={isSaveModalOpen} onClose={() => setIsSaveModalOpen(false)} onConfirm={handleSaveConfig} />
 
-      <div className="px-8 py-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 z-20">
+      <div className="px-8 pt-3 pb-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 z-20 shrink-0">
           <div className="flex items-center gap-5">
               <div className="relative flex items-center justify-center group cursor-default shrink-0">
                   <div className="absolute inset-0 bg-[#CC0000] blur-[15px] opacity-20 rounded-full group-hover:opacity-60 transition-all duration-700"></div>
@@ -315,10 +315,7 @@ export default function DevPermit() {
                       <h3 className="font-black text-[#022d41] uppercase tracking-widest text-[24px] flex items-center gap-2 leading-none">DEV <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#8B0000] to-[#FFD700] drop-shadow-sm">PERMIT</span></h3>
                       <span className="px-3 py-1 bg-[#fe424d]/20 text-[#fe424d] text-[11px] font-black rounded-full border border-[#fe424d]/40 uppercase tracking-widest shadow-sm">BETA</span>
                   </div>
-                  <div className="flex items-center gap-1.5 mt-[6px]">
-                      <div className="w-10 h-[2px] bg-[#af7a2b]"></div>
-                      <p className="text-[11px] font-medium text-[#4d5a44] uppercase tracking-[0.2em] leading-none">SYSTEM MODULE VISIBILITY CONTROL</p>
-                  </div>
+                  <p className="text-[11px] font-bold text-[#4d5a44] uppercase tracking-[0.2em] mt-0.5 opacity-80 leading-none">SYSTEM MODULE VISIBILITY CONTROL</p>
               </div>
           </div>
           <button onClick={() => setIsSaveModalOpen(true)} className="bg-gradient-to-r from-[#022d41] to-[#214573] hover:scale-105 text-white px-8 py-3.5 rounded-xl font-black text-[12px] uppercase tracking-widest shadow-md transition-all flex items-center gap-3 active:scale-95 border border-[#022d41]">
@@ -327,8 +324,8 @@ export default function DevPermit() {
       </div>
 
       <div className="px-8 mt-2 pb-6">
-        <div className="max-w-[1500px] w-full mx-auto space-y-5">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 z-20 shrink-0">
+        <div className="max-w-[1500px] w-full mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5 shrink-0 z-20">
               <KpiCard label="ACTIVE MODULES" value={<>{activeComponents} <span className="text-[20px] text-[#a3c2d2]">/ {totalComponents}</span></>} icon={LayoutGrid} colorAccent={THEME.primaryLight} colorValue={THEME.primary} desc="Currently Visible Components" />
               <KpiCard label="RESTRICTED VISIBILITY" value={restrictedComponents} icon={Lock} colorAccent={THEME.danger} colorValue={THEME.danger} desc="Modules Hidden From Sidebar" />
           </div>

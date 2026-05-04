@@ -300,7 +300,7 @@ export default function AccessLogs() {
             <UserGuidePanel isOpen={isGuideOpen} onClose={() => setIsGuideOpen(false)} />
             <LogDetailsModal isOpen={!!selectedLog} onClose={() => setSelectedLog(null)} log={selectedLog} />
 
-            <div className="px-8 py-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 z-20">
+            <div className="px-8 pt-3 pb-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 z-20 shrink-0">
                 <div className="flex items-center gap-5">
                     <div className="relative flex items-center justify-center group cursor-default shrink-0">
                         <div className="absolute inset-0 bg-[#CC0000] blur-[15px] opacity-20 rounded-full group-hover:opacity-60 transition-all duration-700"></div>
@@ -314,19 +314,16 @@ export default function AccessLogs() {
                                 SYSTEM <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#8B0000] to-[#FFD700] drop-shadow-sm">ACCESS LOGS</span>
                             </h3>
                         </div>
-                        <div className="flex items-center gap-1.5 mt-[6px]">
-                            <div className="w-10 h-[2px] bg-[#af7a2b]"></div>
-                            <p className="text-[11px] font-bold text-[#4d5a44] uppercase tracking-[0.2em] mt-0.5 opacity-80 leading-none">
-                                SECURITY AUDIT & ACTIVITY TRACKING
-                            </p>
-                        </div>
+                        <p className="text-[11px] font-bold text-[#4d5a44] uppercase tracking-[0.2em] mt-0.5 opacity-80 leading-none">
+                            SECURITY AUDIT & ACTIVITY TRACKING
+                        </p>
                     </div>
                 </div>
             </div>
 
             <div className="px-8 mt-2 pb-6">
-                <div className="max-w-[1500px] w-full mx-auto space-y-6">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 shrink-0">
+                <div className="max-w-[1500px] w-full mx-auto">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-5 shrink-0">
                         <KpiCard label="Total Requests" value={totalLogs.toLocaleString()} icon={Activity} colorAccent={THEME.primaryLight} colorValue={THEME.primary} desc="All Logged Events" />
                         <KpiCard label="Successful Actions" value={successLogs.toLocaleString()} icon={CheckCircle} colorAccent={THEME.success} colorValue={THEME.success} desc="Authorized Operations" />
                         <KpiCard label="Failed Attempts" value={failedLogs.toLocaleString()} icon={AlertTriangle} colorAccent={THEME.danger} colorValue={THEME.danger} desc="Requires Attention" />
