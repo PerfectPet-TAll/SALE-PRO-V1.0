@@ -96,50 +96,58 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }: SidebarProps) {
 
         {/* Modules Section */}
         <div>
-          {!isCollapsed && (
-            <h3 className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] mb-4 px-2">
-              WMS Modules
-            </h3>
-          )}
-          <div className="space-y-1.5">
-            {MENU_ITEMS.filter(item => item.id !== 'dashboard').map((item) => {
-              const Icon = item.icon;
-              
-              return (
-                <NavLink
-                  key={item.path}
-                  to={item.path}
-                  className={({ isActive }) => twMerge(clsx(
-                    "group flex items-center rounded-xl px-4 py-3 text-xs font-bold uppercase tracking-wider transition-all",
-                    isActive 
-                      ? "bg-white/10 text-white" 
-                      : "text-slate-400 hover:bg-white/5 hover:text-white",
-                    isCollapsed && "justify-center px-0"
-                  ))}
-                  title={isCollapsed ? item.name : undefined}
-                >
-                  <Icon size={18} className={clsx("shrink-0", isCollapsed ? "mr-0" : "mr-4")} />
-                  
-                  {!isCollapsed && (
-                    <>
-                      <span className="flex-1 truncate">{item.name}</span>
-                      <ChevronRightIcon size={14} className="text-slate-500 group-hover:text-white transition-colors" />
-                    </>
-                  )}
+          {['Sales Operations', 'WMS Modules', 'System configuration'].map((catName) => {
+            const categoryItems = MENU_ITEMS.filter(item => item.category === catName);
+            if (categoryItems.length === 0) return null;
 
-                  {item.isConfidential && (
-                    <Lock 
-                      size={12} 
-                      className={clsx(
-                        "text-red-400", 
-                        isCollapsed ? "absolute top-2 right-2" : "ml-2"
-                      )} 
-                    />
-                  )}
-                </NavLink>
-              );
-            })}
-          </div>
+            return (
+              <div key={catName} className="mb-6">
+                {!isCollapsed && (
+                  <h3 className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] mb-4 px-2 tracking-widest">
+                    {catName}
+                  </h3>
+                )}
+                <div className="space-y-1.5">
+                  {categoryItems.map((item) => {
+                    const Icon = item.icon;
+                    return (
+                      <NavLink
+                        key={item.path}
+                        to={item.path}
+                        className={({ isActive }) => twMerge(clsx(
+                          "group flex items-center rounded-xl px-4 py-3 text-xs font-bold uppercase tracking-wider transition-all",
+                          isActive 
+                            ? "bg-white/10 text-white" 
+                            : "text-slate-400 hover:bg-white/5 hover:text-white",
+                          isCollapsed && "justify-center px-0"
+                        ))}
+                        title={isCollapsed ? item.name : undefined}
+                      >
+                        <Icon size={18} className={clsx("shrink-0", isCollapsed ? "mr-0" : "mr-4")} />
+                        
+                        {!isCollapsed && (
+                          <>
+                            <span className="flex-1 truncate">{item.name}</span>
+                            <ChevronRightIcon size={14} className="text-slate-500 group-hover:text-white transition-colors" />
+                          </>
+                        )}
+
+                        {item.isConfidential && (
+                          <Lock 
+                            size={12} 
+                            className={clsx(
+                              "text-red-400", 
+                              isCollapsed ? "absolute top-2 right-2" : "ml-2"
+                            )} 
+                          />
+                        )}
+                      </NavLink>
+                    );
+                  })}
+                </div>
+              </div>
+            );
+          })}
         </div>
       </nav>
 

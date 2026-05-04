@@ -16,6 +16,9 @@ import Home from './pages/Home';
 import PlaceholderPage from './pages/PlaceholderPage';
 import UserPermissions from './pages/UserPermissions';
 import AccessLogs from './pages/AccessLogs';
+import SaleOrder from './pages/SaleOrder/index';
+
+import ProductsCatalogue from './pages/ProductsCatalogue';
 
 export default function App() {
   return (
@@ -34,6 +37,16 @@ export default function App() {
             {/* Protected Routes */}
             <Route element={<Layout />}>
               {/* General Modules (Read-only by default) */}
+              <Route path="/sale-order" element={
+                <ProtectedRoute>
+                  <SaleOrder />
+                </ProtectedRoute>
+              } />
+              <Route path="/catalogue" element={
+                <ProtectedRoute>
+                  <ProductsCatalogue />
+                </ProtectedRoute>
+              } />
               <Route path="/inbound" element={
                 <ProtectedRoute>
                   <PlaceholderPage title="Inbound Control" />

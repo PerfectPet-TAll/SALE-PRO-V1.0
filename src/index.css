@@ -155,6 +155,18 @@
   }
 }
 
+@layer utilities {
+  .custom-scrollbar::-webkit-scrollbar { height: 4px; width: 4px; }
+  .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+  .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+  .custom-scrollbar:hover::-webkit-scrollbar-thumb { background: #94a3b8; }
+  
+  .kanban-scroll::-webkit-scrollbar { height: 4px; width: 4px; }
+  .kanban-scroll::-webkit-scrollbar-track { background: transparent; }
+  .kanban-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+  .kanban-scroll:hover::-webkit-scrollbar-thumb { background: #94a3b8; }
+}
+
 body {
   font-family: var(--font-system);
   @apply text-slate-800 bg-transparent min-h-screen relative;

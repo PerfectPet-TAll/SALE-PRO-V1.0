@@ -50,6 +50,8 @@ import SystemConfig from '../SystemConfig';
 import DevPermit from '../DevPermit';
 import SystemLogs from '../SystemLogs';
 import CalendarHub from '../Calendar';
+import SaleOrder from '../SaleOrder/index';
+import ProductsCatalogue from '../ProductsCatalogue';
 import { useVisibility } from '../../context/ModuleVisibilityContext';
 
 // --- Theme Configuration (Vibrant Palette) ---
@@ -137,6 +139,7 @@ const SYSTEM_MODULES = [
     id: 'sales_operations', label: 'SALES OPERATIONS', icon: Briefcase,
     subItems: [
       { id: 'sales_orders', label: 'Sales Orders (SO)' },
+      { id: 'products_catalogue', label: 'Products Catalogue' },
       { id: 'quotations', label: 'Quotations & Proposals' },
       { id: 'contracts', label: 'Contracts Management' },
       { id: 'invoicing', label: 'Invoicing & Billing' }
@@ -622,6 +625,14 @@ export default function Home() {
             ) : activeTab === 'system_config' ? (
                 <div className="w-full flex-1 flex flex-col">
                 <SystemConfig />
+                </div>
+            ) : activeTab === 'sales_orders' ? (
+                <div className="w-full flex-1 flex flex-col">
+                <SaleOrder />
+                </div>
+            ) : activeTab === 'products_catalogue' ? (
+                <div className="w-full flex-1 flex flex-col">
+                <ProductsCatalogue />
                 </div>
             ) : activeTab === 'dev_permit' ? (
                 <div className="w-full flex-1 flex flex-col">
