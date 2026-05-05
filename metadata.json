@@ -1,5 +1,6 @@
 {
-  "name": "SALE PRO ระบบ Sale & Marketing อัจฉริยะ",
-  "description": "SALE PRO",
-  "requestFramePermissions": []
+  "name": "SALE PRO อัจฉริยะ",
+  "description": "ระบบบริหารงาน Sale & Marketing อัจฉริยะ ครบวงจร",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
 }
