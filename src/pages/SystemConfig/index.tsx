@@ -205,7 +205,7 @@ function UserGuidePanel({ isOpen, onClose }: any) {
     <>
       <div className={`fixed inset-0 z-[190] bg-[#022d41]/60 backdrop-blur-sm transition-opacity duration-500 ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`} onClick={onClose} />
       <div className={`fixed inset-y-0 right-0 z-[200] w-full md:w-[500px] bg-white shadow-2xl transform transition-transform duration-500 ease-in-out flex flex-col border-l-2 border-[#af7a2b] ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-        <div className="flex justify-between items-center p-5 px-6 border-b-2 border-[#af7a2b] bg-[#022d41] text-white shrink-0">
+        <div className="flex justify-between items-center p-4 px-6 border-b-2 border-[#af7a2b] bg-[#022d41] text-white shrink-0">
           <div>
             <h3 className="font-black flex items-center gap-3 uppercase tracking-widest text-lg"><Settings2 size={22} className="text-[#af7a2b]"/> CONFIG GUIDE</h3>
             <p className="text-[12px] font-bold text-[#e7dedd] uppercase tracking-widest mt-1.5">System Master Data Configuration</p>
@@ -213,10 +213,22 @@ function UserGuidePanel({ isOpen, onClose }: any) {
           <button onClick={onClose} className="p-2 text-white/50 hover:text-[#fe424d] hover:bg-white/10 rounded-xl transition-colors"><X size={24}/></button>
         </div>
         
-        <div className="flex-1 overflow-y-auto p-8 space-y-8 text-[#214573] text-[12px] leading-relaxed custom-scrollbar bg-white">
+        <div className="flex-1 overflow-y-auto p-6 space-y-6 text-[#214573] text-[12px] leading-relaxed custom-scrollbar bg-white">
           <section className="animate-fadeIn">
             <h4 className="text-[14px] font-black text-[#022d41] mb-3 uppercase flex items-center gap-2 border-b-2 border-[#e7dedd] pb-2 font-mono">
-              <Database size={18} className="text-[#af7a2b]"/> 1. Master Data Management
+              <Icons.MousePointerClick size={18} className="text-[#af7a2b]"/> 1. Action Buttons Guide
+            </h4>
+            <div className="space-y-3 font-medium bg-[#f8f9fa] p-4 rounded-xl border border-[#daecf3] shadow-sm">
+                <div className="flex items-center gap-3"><button className="bg-[#022d41] text-white px-3 py-1 rounded-xl text-[10px] font-black uppercase shadow-sm flex items-center gap-1"><Plus size={12}/> New Record</button> <span className="text-[11px] text-[#214573]">สร้างเรคคอร์ดข้อมูลใหม่</span></div>
+               <div className="flex items-center gap-3"><button className="w-6 h-6 flex items-center justify-center bg-white text-[#af7a2b] border border-[#daecf3] rounded-lg shadow-sm"><Icons.Edit size={12}/></button> <span className="text-[11px] text-[#214573]">แก้ไขข้อมูลเก่า</span></div>
+                <div className="flex items-center gap-3"><button className="w-6 h-6 flex items-center justify-center bg-white text-[#fe424d] border border-[#daecf3] rounded-lg shadow-sm"><Trash2 size={12}/></button> <span className="text-[11px] text-[#214573]">ลบข้อมูลในบรรทัดนั้น</span></div>
+                <div className="flex items-center gap-3"><div className="relative"><Search size={12} className="absolute left-2 top-1.5 text-[#a3c2d2]"/><input placeholder="Search..." className="pl-6 py-1 text-[10px] bg-white border border-[#daecf3] rounded-xl w-20 pointer-events-none"/></div> <span className="text-[11px] text-[#214573]">ค้นหาเรคคอร์ดในแท็บปัจจุบัน</span></div>
+            </div>
+          </section>
+
+          <section className="animate-fadeIn" style={{ animationDelay: '0.1s' }}>
+            <h4 className="text-[14px] font-black text-[#022d41] mb-3 uppercase flex items-center gap-2 border-b-2 border-[#e7dedd] pb-2 font-mono">
+              <Database size={18} className="text-[#af7a2b]"/> 2. Master Data Management
             </h4>
             <div className="space-y-3 text-[12px] text-[#214573] font-normal leading-relaxed">
               <p>หน้านี้คือศูนย์กลางการควบคุมข้อมูลพื้นฐานของระบบ (Global Master Data Node) สำหรับใช้งานร่วมกันทุกโมดูล</p>
@@ -365,7 +377,7 @@ export default function SystemConfig() {
       <style dangerouslySetInnerHTML={{__html: globalStyles}} />
       
       {/* USER GUIDE TAB BUTTON */}
-      <button onClick={() => setIsGuideOpen(true)} className="fixed right-0 top-[220px] -translate-y-1/2 bg-[#f8f9fa] border border-[#daecf3] border-r-0 text-[#022d41] py-8 px-1.5 rounded-l-xl shadow-md hover:bg-[#D2042D] hover:text-white hover:border-[#D2042D] transition-all duration-500 z-[100] flex flex-col items-center gap-4 group">
+      <button onClick={() => setIsGuideOpen(true)} className="fixed right-0 top-[160px] bg-[#f8f9fa] border border-[#daecf3] border-r-0 text-[#022d41] py-8 px-1.5 rounded-l-xl shadow-md hover:bg-[#D2042D] hover:text-white hover:border-[#D2042D] transition-all duration-500 z-[100] flex flex-col items-center gap-4 group">
           <HelpCircle size={18} className="shrink-0 group-hover:rotate-12 transition-transform text-[#a3c2d2] group-hover:text-white" />
           <span className="font-black tracking-[0.3em] [writing-mode:vertical-rl] rotate-180 whitespace-nowrap uppercase text-[11px]">USER GUIDE</span>
       </button>

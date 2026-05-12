@@ -156,7 +156,7 @@ function UserGuidePanel({ isOpen, onClose }: any) {
     <>
       <div className={`fixed inset-0 z-[190] bg-[#022d41]/60 backdrop-blur-sm transition-opacity duration-500 ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`} onClick={onClose}/>
       <div className={`fixed inset-y-0 right-0 z-[200] w-full md:w-[500px] bg-white shadow-2xl transform transition-transform duration-500 ease-in-out flex flex-col border-l-2 border-[#af7a2b] ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-        <div className="flex justify-between items-center p-5 px-6 border-b-2 border-[#af7a2b] bg-[#022d41] text-white shrink-0">
+        <div className="flex justify-between items-center p-4 px-6 border-b-2 border-[#af7a2b] bg-[#022d41] text-white shrink-0">
           <div>
             <h3 className="font-black flex items-center gap-3 uppercase tracking-widest text-lg"><Settings2 size={22} className="text-[#af7a2b]"/> DEV GUIDE</h3>
             <p className="text-[10px] font-bold text-[#4d5a44] uppercase tracking-widest mt-1 drop-shadow-sm">System Visibility Control</p>
@@ -165,8 +165,29 @@ function UserGuidePanel({ isOpen, onClose }: any) {
         </div>
         <div className="flex-1 overflow-y-auto custom-scrollbar p-8 space-y-8 text-[#214573] text-[12px] leading-relaxed bg-white">
           <section className="animate-fadeIn">
+            <h4 className="text-[14px] font-black text-[#022d41] mb-3 uppercase flex items-center gap-2 border-b-2 border-[#e7dedd] pb-2 font-mono">
+              <Icons.MousePointerClick size={18} className="text-[#af7a2b]"/> 1. Action Buttons Guide
+            </h4>
+            <div className="space-y-3 font-medium bg-[#f8f9fa] p-4 rounded-xl border border-[#daecf3] shadow-sm">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-4 rounded-full bg-[#398797] p-0.5"><div className="w-3 h-3 bg-white rounded-full translate-x-4"></div></div> 
+                  <span className="text-[11px] text-[#214573]"><b>Toggle เปิด:</b> เปิดใช้งานโมดูล ให้ผู้ใช้ที่ได้รับสิทธิ์สามารถมองเห็นเมนูที่แถบด้านซ้าย</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-4 rounded-full bg-[#cdd0db] p-0.5"><div className="w-3 h-3 bg-white rounded-full"></div></div> 
+                  <span className="text-[11px] text-[#214573]"><b>Toggle ปิด:</b> ซ่อนโมดูลจากแถบด้านซ้ายของทุกคน เมนูย่อยในโมดูลนั้นจะถูกซ่อนทั้งหมดเช่นกัน</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <button className="bg-[#cc0000] text-white px-2 py-1 rounded text-[9px] font-black shadow-lg"><Save size={10} className="inline"/></button> 
+                  <span className="text-[11px] text-[#214573]"><b>SAVE CONFIGURATION:</b> บันทึกการตั้งค่าลง Master Database</span>
+                </div>
+                <div className="flex items-center gap-3"><div className="relative"><Search size={12} className="absolute left-2 top-1.5 text-[#a3c2d2]"/><input placeholder="Search..." className="pl-6 py-1 text-[10px] bg-white border border-[#daecf3] rounded-lg w-20 pointer-events-none"/></div> <span className="text-[11px] text-[#214573]">ค้นหาชื่อโมดูล</span></div>
+            </div>
+          </section>
+
+          <section className="animate-fadeIn" style={{ animationDelay: '0.1s' }}>
             <h4 className="text-[14px] font-black text-[#022d41] mb-3 uppercase flex items-center gap-2 border-b-2 border-[#e7dedd] pb-2">
-              <LayoutGrid size={18} className="text-[#af7a2b]"/> 1. Global Menu Sync
+              <LayoutGrid size={18} className="text-[#af7a2b]"/> 2. Global Menu Sync
             </h4>
             <div className="space-y-3 font-medium bg-[#f8f9fa] p-4 rounded-xl border border-[#daecf3] shadow-sm">
               <p>ระบบ Dev Permit (BETA) ออกแบบมาเพื่อให้นักพัฒนา (Developer) หรือ Super Admin สามารถควบคุม <b>การมองเห็น (Visibility)</b> ของเมนูทั้งหมดในระบบส่วนกลาง</p>
@@ -294,7 +315,7 @@ export default function DevPermit() {
   return (
     <div className="flex flex-1 w-full font-sans flex-col pb-0 animate-fadeIn bg-transparent">
       <style dangerouslySetInnerHTML={{__html: globalStyles}} />
-      <button onClick={() => setIsGuideOpen(true)} className="fixed right-0 top-[220px] -translate-y-1/2 bg-[#f8f9fa] border border-[#daecf3] border-r-0 text-[#022d41] py-8 px-1.5 rounded-l-xl shadow-md hover:bg-[#D2042D] hover:text-white hover:border-[#D2042D] transition-all duration-500 z-[100] flex flex-col items-center gap-4 group">
+      <button onClick={() => setIsGuideOpen(true)} className="fixed right-0 top-[160px] bg-[#f8f9fa] border border-[#daecf3] border-r-0 text-[#022d41] py-8 px-1.5 rounded-l-xl shadow-md hover:bg-[#D2042D] hover:text-white hover:border-[#D2042D] transition-all duration-500 z-[100] flex flex-col items-center gap-4 group">
           <HelpCircle size={18} className="shrink-0 group-hover:rotate-12 transition-transform text-[#a3c2d2] group-hover:text-white" />
           <span className="font-black tracking-[0.3em] [writing-mode:vertical-rl] rotate-180 whitespace-nowrap uppercase text-[11px]">USER GUIDE</span>
       </button>

@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import { 
   Activity, ShieldAlert, Clock, UserCheck, Search, Filter, Download, 
   Eye, X, FileText, AlertTriangle, CheckCircle, Server, Database, 
-  ChevronLeft, ChevronRight, HelpCircle, ChevronDown, MapPin
+  ChevronLeft, ChevronRight, HelpCircle, ChevronDown, MapPin, MousePointerClick
 } from 'lucide-react';
 
 const THEME = {
@@ -95,7 +95,7 @@ function UserGuidePanel({ isOpen, onClose }: any) {
     <>
       <div className={`fixed inset-0 z-[190] bg-[#022d41]/60 backdrop-blur-sm transition-opacity duration-500 ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`} onClick={onClose} />
       <div className={`fixed inset-y-0 right-0 z-[200] w-full md:w-[500px] bg-white shadow-2xl transform transition-transform duration-500 ease-in-out flex flex-col border-l-4 border-[#af7a2b] ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-        <div className="bg-[#022d41] px-8 py-5 flex justify-between items-center text-white shrink-0 border-b border-[#214573] shadow-sm relative z-10">
+        <div className="bg-[#022d41] p-4 px-6 flex justify-between items-center text-white shrink-0 border-b border-[#214573] shadow-sm relative z-10">
           <div className="flex items-center gap-4">
             <div className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center text-white shadow-inner border border-white/20"><ShieldAlert size={20} /></div>
             <div>
@@ -106,10 +106,21 @@ function UserGuidePanel({ isOpen, onClose }: any) {
           <button onClick={onClose} className="p-2 hover:bg-white/10 rounded-full transition-all text-white/70 hover:text-white"><X size={20}/></button>
         </div>
         
-        <div className="flex-1 overflow-y-auto p-8 space-y-8 text-[#214573] text-[12px] leading-relaxed custom-scrollbar bg-[#e7dedd]/50">
+        <div className="flex-1 overflow-y-auto p-6 space-y-6 text-[#214573] text-[12px] leading-relaxed custom-scrollbar bg-[#e7dedd]/50">
           <section className="animate-fadeIn">
+            <h4 className="text-[14px] font-black text-[#022d41] mb-3 uppercase flex items-center gap-2 border-b border-[#daecf3] pb-2 font-mono">
+              <MousePointerClick size={18} className="text-[#af7a2b]"/> 1. Action Buttons Guide
+            </h4>
+            <div className="space-y-3 font-medium bg-white p-4 rounded-xl border border-[#daecf3] shadow-sm">
+                <div className="flex items-center gap-3"><button className="px-2 py-1 bg-white border border-[#022d41]/20 text-[#022d41] rounded-lg shadow-sm font-black text-[9px] uppercase"><strong className="text-[#022d41]">View</strong></button> <span className="text-[11px] text-[#214573]">ดูรายละเอียดการกระทำเชิงลึก (Payload Details) รูปแบบ JSON</span></div>
+                <div className="flex items-center gap-3"><div className="relative"><Search size={12} className="absolute left-2 top-1.5 text-[#a3c2d2]"/><input placeholder="Search..." className="pl-6 py-1 text-[10px] bg-white border border-[#214573]/20 rounded-xl w-20 pointer-events-none"/></div> <span className="text-[11px] text-[#214573]">ค้นหาประวัติการใช้งานด้วยคำค้นหลัก</span></div>
+                <div className="flex items-center gap-3"><div className="px-2 py-1 bg-white border border-[#214573]/20 rounded-xl text-[10px] font-black"><Filter size={10} className="inline mr-1 text-[#214573]"/> All Events </div> <span className="text-[11px] text-[#214573]">กรองประวัติตามประเภทเหตุการณ์ (Login, Error, etc.)</span></div>
+            </div>
+          </section>
+
+          <section className="animate-fadeIn" style={{ animationDelay: '0.1s' }}>
             <h4 className="text-[14px] font-black text-[#022d41] mb-3 uppercase flex items-center gap-2 border-b border-[#daecf3] pb-2">
-              <Activity size={18} className="text-[#af7a2b]"/> 1. Purpose of Access Logs
+              <Activity size={18} className="text-[#af7a2b]"/> 2. Purpose of Access Logs
             </h4>
             <div className="space-y-3 text-[12px] font-medium leading-relaxed bg-white p-4 rounded-xl border border-[#daecf3] shadow-sm">
               <p className="mb-2">หน้าต่าง Access Logs ใช้สำหรับการตรวจสอบความเคลื่อนไหวและประวัติการเข้าถึงระบบทั้งหมด เพื่อให้สอดคล้องกับมาตรฐานความปลอดภัย (Security Audit)</p>
@@ -292,7 +303,7 @@ export default function AccessLogs() {
         <div className="flex flex-1 w-full font-sans flex-col pb-0 animate-fadeIn bg-transparent">
             <style dangerouslySetInnerHTML={{__html: globalStyles}} />
             
-            <button onClick={() => setIsGuideOpen(true)} className="fixed right-0 top-[220px] -translate-y-1/2 bg-[#f8f9fa] border border-[#daecf3] border-r-0 text-[#022d41] py-8 px-1.5 rounded-l-xl shadow-md hover:bg-[#D2042D] hover:text-white hover:border-[#D2042D] transition-all duration-500 z-[100] flex flex-col items-center gap-4 group">
+            <button onClick={() => setIsGuideOpen(true)} className="fixed right-0 top-[160px] bg-[#f8f9fa] border border-[#daecf3] border-r-0 text-[#022d41] py-8 px-1.5 rounded-l-xl shadow-md hover:bg-[#D2042D] hover:text-white hover:border-[#D2042D] transition-all duration-500 z-[100] flex flex-col items-center gap-4 group">
           <HelpCircle size={18} className="shrink-0 group-hover:rotate-12 transition-transform text-[#a3c2d2] group-hover:text-white" />
           <span className="font-black tracking-[0.3em] [writing-mode:vertical-rl] rotate-180 whitespace-nowrap uppercase text-[11px]">USER GUIDE</span>
       </button>

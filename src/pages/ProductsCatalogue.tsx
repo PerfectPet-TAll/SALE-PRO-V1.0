@@ -60,12 +60,23 @@ export default function ProductsCatalogue() {
 
     return (
     <div className="flex flex-1 w-full font-sans flex-col pb-0 animate-fadeIn bg-transparent">
-        <button onClick={() => setIsGuideOpen(true)} className="fixed right-0 top-[220px] -translate-y-1/2 bg-[#f8f9fa] border border-[#daecf3] border-r-0 text-[#022d41] py-8 px-1.5 rounded-l-xl shadow-md hover:bg-[#D2042D] hover:text-white hover:border-[#D2042D] transition-all duration-500 z-[100] flex flex-col items-center gap-4 group">
+        <button onClick={() => setIsGuideOpen(true)} className="fixed right-0 top-[160px] bg-[#f8f9fa] border border-[#daecf3] border-r-0 text-[#022d41] py-8 px-1.5 rounded-l-xl shadow-md hover:bg-[#D2042D] hover:text-white hover:border-[#D2042D] transition-all duration-500 z-[100] flex flex-col items-center gap-4 group">
             <Icons.HelpCircle size={18} className="shrink-0 group-hover:rotate-12 transition-transform text-[#a3c2d2] group-hover:text-white" />
             <span className="font-black tracking-[0.3em] [writing-mode:vertical-rl] rotate-180 whitespace-nowrap uppercase text-[11px]">USER GUIDE</span>
         </button>
 
-        <UserGuidePanel isOpen={isGuideOpen} onClose={() => setIsGuideOpen(false)} title="Products Catalogue" desc="ระบบจัดการแคตตาล็อกสินค้า" />
+        <UserGuidePanel isOpen={isGuideOpen} onClose={() => setIsGuideOpen(false)} title="Products Catalogue" desc="ระบบจัดการแคตตาล็อกสินค้า">
+            <section className="animate-fadeIn mt-6">
+                <h4 className="text-[14px] font-black text-[#022d41] mb-3 uppercase flex items-center gap-2 border-b-2 border-[#e7dedd] pb-2 font-mono">
+                <Icons.MousePointerClick size={18} className="text-[#af7a2b]"/> 1. Action Buttons Guide
+                </h4>
+                <div className="space-y-3 font-medium bg-[#f8f9fa] p-4 rounded-xl border border-[#daecf3] shadow-sm text-[12px]">
+                    <div className="flex items-center gap-3"><button className="bg-[#cc0000] text-white px-3 py-1 rounded-full text-[10px] font-black uppercase shadow-sm flex items-center gap-1"><Icons.Plus size={12}/> New Product</button> <span className="text-[11px] text-[#214573]">เพิ่มรายการสินค้าใหม่ลงในแคตตาล็อก</span></div>
+                    <div className="flex items-center gap-3"><div className="relative"><Icons.Search size={12} className="absolute left-2 top-1.5 text-[#a3c2d2]"/><input placeholder="Search..." className="pl-6 py-1 text-[10px] bg-white border border-[#daecf3] rounded-full w-20 pointer-events-none"/></div> <span className="text-[11px] text-[#214573]">ค้นหาสินค้าด้วยชื่อ บาร์โค้ด หรือ รหัส SKU</span></div>
+                    <div className="flex items-center gap-3"><button className="w-8 h-8 flex items-center justify-center bg-white text-[#af7a2b] border border-[#daecf3] rounded-lg shadow-sm"><Icons.Edit size={14}/></button> <button className="w-8 h-8 flex items-center justify-center bg-white text-[#fe424d] border border-[#daecf3] rounded-lg shadow-sm"><Icons.Trash2 size={14}/></button> <span className="text-[11px] text-[#214573]">แก้ไข หรือ ลบ สินค้าในตาราง</span></div>
+                </div>
+            </section>
+        </UserGuidePanel>
 
         {/* Header Bar synced with CALENDAR style */}
         <div className="px-8 pt-3 pb-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 z-20 shrink-0">

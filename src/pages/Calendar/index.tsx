@@ -23,7 +23,8 @@ import {
   Database,
   CheckCircle,
   Zap,
-  Palmtree
+  Palmtree,
+  MousePointerClick
 } from 'lucide-react';
 
 // --- Theme Configuration (Synced Palette) ---
@@ -103,7 +104,7 @@ function UserGuidePanel({ isOpen, onClose }: any) {
     <>
       <div className={`fixed inset-0 z-[190] bg-[#1f2a44]/60 backdrop-blur-sm transition-opacity duration-500 ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`} onClick={onClose} />
       <div className={`fixed inset-y-0 right-0 z-[200] w-full md:w-[500px] bg-white shadow-2xl transform transition-transform duration-500 ease-in-out flex flex-col border-l-2 border-[#c6a75e] ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-        <div className="flex justify-between items-center p-8 border-b-2 border-[#c6a75e] bg-[#1f2a44] text-white shrink-0">
+        <div className="flex justify-between items-center p-4 px-6 border-b-2 border-[#c6a75e] bg-[#1f2a44] text-white shrink-0">
           <div>
             <h3 className="font-black flex items-center gap-3 uppercase tracking-widest text-xl"><BookOpen size={24} className="text-[#c6a75e]"/> CALENDAR GUIDE</h3>
             <p className="text-[12px] font-bold text-[#e8dcc8] uppercase tracking-widest mt-1.5">Operational Schedule Management</p>
@@ -111,10 +112,21 @@ function UserGuidePanel({ isOpen, onClose }: any) {
           <button onClick={onClose} className="p-2 text-white/50 hover:text-[#ff929a] hover:bg-white/10 rounded-xl transition-colors"><X size={24}/></button>
         </div>
         
-        <div className="flex-1 overflow-y-auto custom-scrollbar p-8 space-y-8 text-[#435665] text-[12px] leading-relaxed">
+        <div className="flex-1 overflow-y-auto custom-scrollbar p-6 space-y-6 text-[#435665] text-[12px] leading-relaxed">
           <section className="animate-fadeIn">
             <h4 className="text-[14px] font-black text-[#1f2a44] mb-3 uppercase flex items-center gap-2 border-b-2 border-[#e8dcc8] pb-2 font-mono">
-              <ShoppingCart size={18} className="text-[#c6a75e]"/> 1. Sales Planning
+              <MousePointerClick size={18} className="text-[#c6a75e]"/> 1. Action Buttons Guide
+            </h4>
+            <div className="space-y-3 font-medium bg-[#f8f9fa] p-4 rounded-xl border border-[#cdd0db] shadow-sm">
+                <div className="flex items-center gap-3"><button className="bg-[#1aa6b7] text-white px-3 py-1 rounded-lg text-[10px] font-black uppercase shadow-sm flex items-center gap-1"><Plus size={12}/> New Event</button> <span className="text-[11px] text-[#435665]">เพิ่มกิจกรรมหรือนัดหมายใหม่ลงในปฏิทิน</span></div>
+                <div className="flex items-center gap-3"><div className="flex bg-[#e7dedd] rounded-lg p-1 gap-1"><button className="w-8 h-6 bg-white text-[#022d41] rounded shadow-sm text-[10px] font-black">Month</button><button className="w-8 h-6 text-[#8E95A6] rounded text-[10px] font-black">Week</button></div> <span className="text-[11px] text-[#435665]">สลับมุมมองปฏิทินระหว่างรายเดือน / รายสัปดาห์ / รายวัน</span></div>
+                <div className="flex items-center gap-3"><div className="flex gap-1"><button className="w-6 h-6 flex items-center justify-center bg-white border border-[#cdd0db] rounded shadow-sm"><ChevronLeft size={12}/></button><button className="w-6 h-6 flex items-center justify-center bg-white border border-[#cdd0db] rounded shadow-sm"><ChevronRight size={12}/></button></div> <span className="text-[11px] text-[#435665]">เลื่อนดูเดือนก่อนหน้า / ถัดไป</span></div>
+            </div>
+          </section>
+
+          <section className="animate-fadeIn" style={{ animationDelay: '0.1s' }}>
+            <h4 className="text-[14px] font-black text-[#1f2a44] mb-3 uppercase flex items-center gap-2 border-b-2 border-[#e8dcc8] pb-2 font-mono">
+              <ShoppingCart size={18} className="text-[#c6a75e]"/> 2. Sales Planning
             </h4>
             <p className="mb-3">ใช้เพื่อติดตามและนัดหมายกิจกรรมสำคัญในระบบจัดซื้อ เช่น:</p>
             <ul className="list-disc pl-5 space-y-2">
@@ -248,7 +260,7 @@ export default function CalendarHub() {
       <style dangerouslySetInnerHTML={{__html: globalStyles}} />
       
       {/* USER GUIDE FLOATING TAB */}
-      <button onClick={() => setIsGuideOpen(true)} className="fixed right-0 top-[220px] -translate-y-1/2 bg-white border border-[#cdd0db] border-r-0 text-[#1f2a44] py-8 px-1.5 rounded-l-xl shadow-md hover:bg-[#D2042D] hover:text-white hover:border-[#D2042D] transition-all duration-500 z-[100] flex flex-col items-center gap-4 group">
+      <button onClick={() => setIsGuideOpen(true)} className="fixed right-0 top-[160px] bg-white border border-[#cdd0db] border-r-0 text-[#1f2a44] py-8 px-1.5 rounded-l-xl shadow-md hover:bg-[#D2042D] hover:text-white hover:border-[#D2042D] transition-all duration-500 z-[100] flex flex-col items-center gap-4 group">
           <HelpCircle size={18} className="shrink-0 group-hover:rotate-12 transition-transform text-[#fe424d] group-hover:text-white" />
           <span className="font-black tracking-[0.3em] [writing-mode:vertical-rl] rotate-180 whitespace-nowrap uppercase text-[11px]">USER GUIDE</span>
       </button>

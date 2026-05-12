@@ -42,7 +42,9 @@ import {
   Briefcase,
   TrendingUp,
   MessageSquare,
-  Percent
+  Percent,
+  CalendarDays,
+  Bot
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import UserPermission from '../UserPermissions';
@@ -52,12 +54,13 @@ import SystemLogs from '../SystemLogs';
 import CalendarHub from '../Calendar';
 import SaleOrder from '../SaleOrder/index';
 import ProductsCatalogue from '../ProductsCatalogue';
+import AiCopilot from '../AiCopilot';
 import { useVisibility } from '../../context/ModuleVisibilityContext';
 
 // --- Theme Configuration (Vibrant Palette) ---
 const THEME = {
     bgMain: '#f7f3ee',
-    bgGradient: 'linear-gradient(135deg, #d8cfd6 50%, #f6f8ec 100%)',
+    bgGradient: 'linear-gradient(135deg, #f3f3f1 0%, #eaeaec 100%)',
     sidebarBg: '#212638',
     glassWhite: 'rgba(255, 255, 255, 0.88)',
     primary: '#5372ba',
@@ -107,8 +110,10 @@ const THEME = {
 // --- System Modules Data ---
 const SYSTEM_MODULES = [
   { id: 'dashboard', label: 'SALE & MARKETING DASHBOARD', icon: LayoutDashboard },
+  { id: 'ai_copilot', label: 'AI COPILOT', icon: Bot },
   { id: 'calendar', label: 'CALENDAR', icon: Calendar },
-  { id: 'heading_op', isHeading: true, label: 'OPERATIONAL MODULES' },
+
+  { id: 'heading_op', isHeading: true, label: 'SALES & LEADS' },
   {
     id: 'lead_management', label: 'LEAD MANAGEMENT', icon: Filter,
     subItems: [
@@ -127,15 +132,6 @@ const SYSTEM_MODULES = [
     ]
   },
   {
-    id: 'marketing_campaigns', label: 'MARKETING CAMPAIGNS', icon: Megaphone,
-    subItems: [
-      { id: 'active_campaigns', label: 'Active Campaigns' },
-      { id: 'email_automation', label: 'Email Automation' },
-      { id: 'social_ads', label: 'Social & Ads Spend' },
-      { id: 'events_webinars', label: 'Events & Webinars' }
-    ]
-  },
-  {
     id: 'sales_operations', label: 'SALES OPERATIONS', icon: Briefcase,
     subItems: [
       { id: 'sales_orders', label: 'Sales Orders (SO)' },
@@ -145,6 +141,26 @@ const SYSTEM_MODULES = [
       { id: 'invoicing', label: 'Invoicing & Billing' }
     ]
   },
+
+  { id: 'heading_marketing', isHeading: true, label: 'MARKETING & PROMOTIONS' },
+  {
+    id: 'marketing_campaigns', label: 'MARKETING CAMPAIGNS', icon: Megaphone,
+    subItems: [
+      { id: 'active_campaigns', label: 'Active Campaigns' },
+      { id: 'email_automation', label: 'Email Automation' },
+      { id: 'social_ads', label: 'Social & Ads Spend' },
+      { id: 'events_webinars', label: 'Events & Webinars' }
+    ]
+  },
+  {
+    id: 'promotions_pricing', label: 'PROMOTIONS & PRICING', icon: Percent,
+    subItems: [
+      { id: 'discount_codes', label: 'Discount Codes' },
+      { id: 'price_books', label: 'Price Books' }
+    ]
+  },
+
+  { id: 'heading_analytics', isHeading: true, label: 'ANALYTICS & SUPPORT' },
   {
     id: 'analytics', label: 'PERFORMANCE ANALYTICS', icon: TrendingUp,
     subItems: [
@@ -162,13 +178,8 @@ const SYSTEM_MODULES = [
       { id: 'retention_tracking', label: 'Retention Tracking' }
     ]
   },
-  {
-    id: 'promotions_pricing', label: 'PROMOTIONS & PRICING', icon: Percent,
-    subItems: [
-      { id: 'discount_codes', label: 'Discount Codes' },
-      { id: 'price_books', label: 'Price Books' }
-    ]
-  },
+
+  { id: 'heading_finance', isHeading: true, label: 'FINANCE & ADMINISTRATION' },
   {
     id: 'finance', label: 'FINANCE', icon: DollarSign,
     subItems: [
@@ -281,8 +292,11 @@ const SalesChartArea = () => {
     { name: "E-commerce", target: 15, actual: 16, color: THEME.c16 },
   ];
   return (
-    <GlassCard className="lg:col-span-2 bg-gradient-to-br from-white to-[#f0f2f5] border-[#cdd0db]">
-      <div className="flex justify-between items-center mb-4 relative z-10">
+    <GlassCard className="lg:col-span-2 bg-gradient-to-br from-white to-[#f0f2f5] border-[#cdd0db] overflow-hidden relative">
+    <div className="absolute -bottom-10 -right-4 opacity-[0.03] text-[#022d41] -rotate-[15deg] pointer-events-none z-0">
+        <BarChart2 size={240} />
+    </div>
+    <div className="flex justify-between items-center mb-4 relative z-10">
         <h2 className="text-base font-black text-[#022d41] flex items-center gap-2 uppercase tracking-tight">
             <BarChart2 size={16} className="text-[#f91a47]" /> Strategic Sales Analysis
         </h2>
@@ -307,7 +321,10 @@ const SalesChartArea = () => {
 };
 
 const UrgentTasks = () => (
-  <GlassCard className="bg-gradient-to-b from-white to-[#cdd0db]/20 border-[#9094ac]/30">
+  <GlassCard className="bg-gradient-to-b from-white to-[#cdd0db]/20 border-[#9094ac]/30 overflow-hidden relative">
+    <div className="absolute -bottom-10 -right-4 opacity-[0.03] text-[#022d41] -rotate-[15deg] pointer-events-none z-0">
+        <AlertCircle size={200} />
+    </div>
     <div className="flex justify-between items-center mb-4 relative z-10">
       <h2 className="text-base font-black text-[#022d41] flex items-center gap-2 uppercase tracking-tight">
           <AlertCircle size={16} className="text-[#f91a47]" /> Critical Action
@@ -340,12 +357,166 @@ const UrgentTasks = () => (
   </GlassCard>
 );
 
+const ActiveCampaigns = () => (
+  <GlassCard className="lg:col-span-2 bg-gradient-to-br from-white to-[#f0f2f5] border-[#cdd0db] overflow-hidden relative">
+    <div className="absolute -bottom-10 -right-4 opacity-[0.03] text-[#022d41] -rotate-[15deg] pointer-events-none z-0">
+        <Target size={240} />
+    </div>
+    <div className="flex justify-between items-center mb-4 relative z-10">
+      <h2 className="text-base font-black text-[#022d41] flex items-center gap-2 uppercase tracking-tight">
+          <Target size={16} className="text-[#DE3848]" /> Active Sales Campaigns
+      </h2>
+      <span className="text-[8px] font-black bg-[#5372ba]/10 text-[#5372ba] px-3 py-1 rounded-full uppercase tracking-widest border border-[#5372ba]/20">Needs Attention</span>
+    </div>
+    <div className="space-y-3 relative z-10 w-full overflow-y-auto pr-1">
+        {[
+          { title: "Q3 B2B Expansion - Singapore", subtitle: "STRATEGIC EXPANSION | LEAD: ALEX T.", status: "IN PROGRESS", type: "progress", icon: Building2 },
+          { title: "Summer Promo Retargeting", subtitle: "DIGITAL MARKETING | DUE: TODAY 15:00", status: "SCHEDULED", type: "scheduled", icon: Megaphone },
+          { title: "Product Launch: Pro System", subtitle: "BRANDING | AWAITING BUDGET APPROVAL", status: "PENDING BUDGET", type: "pending", icon: Sparkles },
+        ].map((item, i) => (
+          <div key={i} className="p-3.5 bg-white rounded-xl border border-[#cdd0db]/50 flex gap-4 items-center hover:shadow-md transition-all">
+            <div className={`p-2.5 rounded-xl bg-gradient-to-br from-[#f8f9fa] to-[#e7dedd] border border-[#cdd0db] shrink-0`}>
+                <item.icon size={18} className="text-[#254268]"/>
+            </div>
+            <div className="flex-1 min-w-0">
+                <p className="text-[12px] font-black text-[#1f2a44] tracking-tight truncate">{item.title}</p>
+                <div className="flex justify-start items-center mt-1">
+                    <p className="text-[9px] text-[#7691ad] font-bold uppercase tracking-widest">{item.subtitle}</p>
+                </div>
+            </div>
+            <div className="shrink-0 text-right">
+                <span className={`text-[9px] font-black uppercase px-3 py-1.5 rounded-full whitespace-nowrap overflow-hidden
+                    ${item.type === 'progress' ? 'bg-[#ff929a]/15 text-[#DE3848] border border-[#ff929a]/30' : 
+                      item.type === 'scheduled' ? 'bg-[#1aa6b7]/15 text-[#1aa6b7] border border-[#1aa6b7]/30' : 
+                      'bg-[#ffa64a]/15 text-[#ce870a] border border-[#ffa64a]/30'}`}>
+                    {item.status}
+                </span>
+            </div>
+          </div>
+        ))}
+    </div>
+  </GlassCard>
+);
+
+const SalesAlerts = () => (
+  <GlassCard className="bg-white border-[#cdd0db] overflow-hidden relative">
+    <div className="absolute -bottom-10 -right-4 opacity-[0.03] text-[#022d41] -rotate-[15deg] pointer-events-none z-0">
+        <AlertCircle size={240} />
+    </div>
+    <div className="flex justify-between items-center mb-4 relative z-10">
+      <h2 className="text-base font-black text-[#022d41] flex items-center gap-2 uppercase tracking-tight">
+          <AlertCircle size={16} className="text-[#ce870a]" /> Sales Alerts
+      </h2>
+    </div>
+    <div className="space-y-4 relative z-10">
+        {[
+          { title: "Low Lead Conversion Alert", icon: Target, text: "B2C Pipeline is below minimum conversion rate (Current: 12%, Target: 20%).", color: "text-[#ce870a]" },
+          { title: "Budget Overrun Detected", icon: TrendingDown, text: "Ad spend for 'Q2 Product Promo' showing abnormal spend rate. Review req.", color: "text-[#DE3848]" },
+        ].map((alert, i) => (
+          <div key={i} className={`p-4 bg-white rounded-xl border border-[#cdd0db]/50 flex gap-3 items-start shadow-sm
+            relative overflow-hidden`}>
+            <div className={`absolute top-0 bottom-0 left-0 w-1.5 bg-gradient-to-b ${i === 0 ? 'from-[#fdda04] to-[#ce870a]' : 'from-[#ff929a] to-[#DE3848]'}`}></div>
+            <div className={`p-1 shrink-0 ${alert.color}`}>
+                <alert.icon size={16}/>
+            </div>
+            <div className="flex-1 min-w-0 pr-1">
+                <p className={`text-[11px] font-black ${alert.color} tracking-tight`}>{alert.title}</p>
+                <p className="text-[10px] text-[#5a4e70] font-medium leading-relaxed mt-1.5 font-mono">
+                    {alert.text}
+                </p>
+            </div>
+          </div>
+        ))}
+    </div>
+  </GlassCard>
+);
+
+const RecentlyWonDeals = () => (
+  <GlassCard className="lg:col-span-2 bg-gradient-to-br from-white to-[#f0f2f5] border-[#cdd0db] overflow-hidden relative">
+    <div className="absolute -bottom-12 -right-4 opacity-[0.03] text-[#022d41] -rotate-[15deg] pointer-events-none z-0">
+        <Award size={260} />
+    </div>
+    <div className="flex justify-between items-center mb-5 relative z-10">
+      <h2 className="text-base font-black text-[#022d41] flex items-center gap-2 uppercase tracking-tight">
+          <Award size={16} className="text-[#1aa6b7]" /> Recently Won Deals
+      </h2>
+      <span className="text-[8px] font-black bg-[#1aa6b7]/10 text-[#1aa6b7] px-3 py-1 rounded-full uppercase tracking-widest border border-[#1aa6b7]/20">This Week</span>
+    </div>
+    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 relative z-10 w-full overflow-y-auto">
+        {[
+          { title: "Alpha Corp Expansion", id: "OPP-1049", team: "Enterprise Sales", date: "10 May", icon: Building2 },
+          { title: "NextGen Tech System", id: "OPP-1052", team: "B2B Channels", date: "11 May", icon: Container },
+          { title: "Global Logistics Ltd", id: "OPP-1055", team: "Key Accounts", date: "12 May", icon: Globe },
+        ].map((item, i) => (
+          <div key={i} className="p-4 bg-white rounded-2xl border border-[#cdd0db]/50 flex flex-col items-center text-center hover:shadow-lg transition-all shadow-sm">
+            <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br from-[#f8f9fa] to-[#e7dedd] border border-[#cdd0db] shrink-0 flex items-center justify-center shadow-sm mb-4 relative`}>
+                <item.icon size={24} className="text-[#254268]"/>
+                <div className="absolute -bottom-2 -right-2 bg-[#1f2a44] p-1 rounded-lg border-2 border-white text-white">
+                  <CheckCircle2 size={12} className="text-[#c6a75e]"/>
+                </div>
+            </div>
+            <h3 className="text-[14px] font-black text-[#1f2a44] tracking-tight mb-1">{item.title}</h3>
+            <p className="text-[10px] text-[#1aa6b7] font-black tracking-widest uppercase mb-1">{item.id}</p>
+            <p className="text-[10px] text-[#7691ad] font-bold tracking-wide mb-4 line-clamp-1">{item.team}</p>
+            <div className="mt-auto w-full pt-3 border-t border-[#cdd0db]/50 text-center">
+                <span className="text-[9px] font-bold text-[#5a4e70] uppercase tracking-widest"><span className="opacity-70">Closed</span> <span className="font-black text-[#022d41] ml-1">{item.date}</span></span>
+            </div>
+          </div>
+        ))}
+    </div>
+  </GlassCard>
+);
+
+const UpcomingSalesCalls = () => (
+  <GlassCard className="bg-white border-[#cdd0db] flex flex-col overflow-hidden relative">
+    <div className="absolute -bottom-10 -right-4 opacity-[0.03] text-[#022d41] -rotate-[15deg] pointer-events-none z-0">
+        <Calendar size={240} />
+    </div>
+    <div className="flex justify-between items-center mb-5 relative z-10">
+      <h2 className="text-base font-black text-[#022d41] flex items-center gap-2 uppercase tracking-tight">
+          <Calendar size={16} className="text-[#254268]" /> Upcoming Schedule
+      </h2>
+    </div>
+    <div className="space-y-3 relative z-10 flex-1">
+        {[
+          { title: "Enterprise Pricing Review", with: "TechCorp CEO", date: "Tomorrow", time: "10:00 AM", type: "Virtual", color: "from-[#ffa64a] to-[#ffc58a]", textColor: "text-[#ce870a]" },
+          { title: "Product Demo", with: "Retail Supply Co", date: "15 May", time: "14:30 PM", type: "On-site", color: "from-[#fdda04] to-[#fde568]", textColor: "text-[#b28f00]" },
+          { title: "Contract Negotiation", with: "Global Logistics", date: "18 May", time: "09:00 AM", type: "Virtual", color: "from-[#5372ba] to-[#869fcb]", textColor: "text-[#254268]" },
+        ].map((call, i) => (
+          <div key={i} className={`p-4 bg-white rounded-xl border border-${call.color.split(' ')[0].replace('from-', '')}/30 flex gap-3 items-center shadow-sm relative overflow-hidden group hover:border-${call.color.split(' ')[0].replace('from-', '')} transition-colors`}>
+            <div className={`absolute top-0 bottom-0 left-0 w-1.5 bg-gradient-to-b ${call.color}`}></div>
+            <div className="p-2 shrink-0 bg-[#f8f9fa] rounded-lg border border-[#cdd0db]/50 text-[#7691ad] group-hover:text-[#254268] transition-colors">
+                <ClipboardList size={18}/>
+            </div>
+            <div className="flex-1 min-w-0 pr-1">
+                <div className="flex justify-between items-start mb-1">
+                  <p className={`text-[12px] font-black text-[#1f2a44] tracking-tight truncate`}>{call.title}</p>
+                  <div className="flex flex-col items-end ml-2 shrink-0">
+                    <span className="text-[11px] font-black text-[#022d41] whitespace-nowrap">{call.date}</span>
+                  </div>
+                </div>
+                <div className="flex justify-between items-end">
+                   <p className="text-[10px] text-[#7691ad] font-bold tracking-widest uppercase">
+                      {call.with}
+                  </p>
+                  <p className="text-[9px] text-[#5a4e70] font-mono whitespace-nowrap">{call.time}</p>
+                </div>
+            </div>
+          </div>
+        ))}
+    </div>
+    <button className="mt-4 w-full bg-gradient-to-r from-[#254268] to-[#1f2a44] hover:scale-[1.02] text-white px-4 py-3 rounded-xl font-black text-[10px] uppercase tracking-widest shadow-md transition-all flex items-center justify-center gap-2 active:scale-95 border border-[#1f2a44]">
+        <CalendarDays size={14} /> View Full Schedule
+    </button>
+  </GlassCard>
+);
+
 const NavItem = ({ item, depth = 0, activeTab, setActiveTab, expandedMenus, toggleMenu, isSidebarOpen }: any) => {
     if (item.isHeading) {
         if (!isSidebarOpen) return <div className="h-4" />;
         return (
-            <div className="mt-6 mb-2 px-4">
-                <span className="text-[10px] font-black text-[#DE3848] uppercase tracking-widest opacity-80">{item.label}</span>
+            <div className="mt-8 mb-2 px-4">
+                <span className="text-[10px] font-black text-[#8E95A6] uppercase tracking-widest opacity-80">{item.label}</span>
             </div>
         );
     }
@@ -489,19 +660,22 @@ export default function Home() {
             {sidebarOpen ? <ChevronRight size={12} className="rotate-180" /> : <ChevronRight size={12} />}
         </button>
 
-        <div className="h-24 flex items-center justify-center border-b border-white/5 px-4 shrink-0">
+        <div className="h-24 flex items-center justify-center px-4 shrink-0">
             <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#E03B46] to-[#DE3848] flex items-center justify-center shadow-[0_0_15px_rgba(222,56,72,0.3)] relative shrink-0">
-                    <TrendingUp size={28} className="text-white" strokeWidth={2.5} />
-                    <div className="absolute -top-0.5 -right-0.5 w-3 h-3 bg-[#ff929a] rounded-full border-2 border-[#212638] animate-pulse"></div>
+                <div className="w-12 h-12 rounded-full p-[2px] bg-gradient-to-tr from-[#c6a75e] via-[#e6be63] to-[#f0f6f4] shadow-[0_0_15px_rgba(198,167,94,0.3)] relative shrink-0">
+                    <div className="w-full h-full rounded-full bg-[#0F172A] flex items-center justify-center relative overflow-hidden">
+                        <div className="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent"></div>
+                        <TrendingUp size={28} className="text-[#c6a75e] relative z-10" strokeWidth={2.5} />
+                    </div>
                 </div>
                 {sidebarOpen && (
                     <div className="overflow-hidden">
                         {/* SALE PRO STANDS OUT: BOLD AND LARGE */}
                         <h1 className="text-[26px] font-black tracking-tighter leading-none uppercase flex items-center">
-                            <span className="text-white">SALE</span><span className="text-[#DE3848] ml-1">PRO</span>
+                            <span className="text-white">SALE</span><span className="text-transparent bg-clip-text bg-gradient-to-r from-[#c6a75e] to-[#e6be63] ml-1">PRO</span>
                         </h1>
-                        <p className="text-[#8E95A6] text-[8px] font-black uppercase tracking-[0.3em] mt-2 opacity-70">Sales & Marketing Hub</p>
+                        <div className="h-[2px] w-full bg-gradient-to-r from-[#c6a75e] to-transparent mt-1.5 mb-1.5 opacity-50 rounded-full"></div>
+                        <p className="text-[#8E95A6] text-[8px] font-black uppercase tracking-[0.3em] opacity-70">Sales & Marketing Hub</p>
                     </div>
                 )}
             </div>
@@ -516,7 +690,7 @@ export default function Home() {
         {/* SIDEBAR FOOTER - DEV PROFILE */}
         <div className="p-4 shrink-0 pb-6">
             <div className={`flex items-center gap-3 ${!sidebarOpen && 'justify-center'}`}>
-                <div className="w-10 h-10 rounded-xl border border-[#5372ba]/40 overflow-hidden shadow-md bg-white/5 shrink-0">
+                <div className="w-10 h-10 rounded-full border border-[#5372ba]/40 overflow-hidden shadow-md bg-white/5 shrink-0">
                     <img src={currentUser.avatar} className="w-full h-full object-cover" alt="Avatar" />
                 </div>
                 {sidebarOpen && (
@@ -613,6 +787,20 @@ export default function Home() {
                         <SalesChartArea />
                         <UrgentTasks />
                     </div>
+                    
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+                        <RecentlyWonDeals />
+                        <UpcomingSalesCalls />
+                    </div>
+
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+                        <ActiveCampaigns />
+                        <SalesAlerts />
+                    </div>
+                </div>
+            ) : activeTab === 'ai_copilot' ? (
+                <div className="w-full flex-1 flex flex-col max-w-5xl mx-auto px-8 py-6 pb-8 animate-fadeIn">
+                <AiCopilot />
                 </div>
             ) : activeTab === 'calendar' ? (
                 <div className="w-full flex-1 flex flex-col">

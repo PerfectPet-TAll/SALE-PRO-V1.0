@@ -462,16 +462,25 @@ export default function HrCalendar() {
         <div className="fixed inset-0 z-[500] flex justify-end animate-in fade-in duration-300">
             <div className="absolute inset-0 bg-[#141A26]/40 backdrop-blur-sm" onClick={() => setIsGuideOpen(false)} />
             <div className="relative w-full max-w-md bg-[#F2F0EB] h-full shadow-2xl flex flex-col animate-in slide-in-from-right duration-500 font-sans">
-                <div className="bg-[#141A26] px-8 py-6 flex justify-between items-center text-white border-b-4 border-[#F2B705]">
+                <div className="bg-[#141A26] p-4 px-6 flex justify-between items-center text-white border-b-4 border-[#F2B705]">
                     <div className="flex items-center gap-3"><HelpCircle size={22} className="text-[#F2B705]" /><h3 className="text-lg font-black uppercase tracking-widest font-mono">Calendar Guide</h3></div>
                     <button onClick={() => setIsGuideOpen(false)} className="p-2 hover:bg-white/10 rounded-xl transition-all"><X size={20} /></button>
                 </div>
-                <div className="flex-1 overflow-y-auto p-8 space-y-10 text-[#3F4859]">
-                    <section><h4 className="font-black text-[#141A26] border-b border-[#4F868C]/10 pb-2 mb-4 flex items-center gap-2 font-mono uppercase tracking-widest text-sm"><span className="bg-[#F2B705] text-[#141A26] w-6 h-6 rounded-full flex items-center justify-center text-[10px]">01</span> HR Events</h4><p className="text-[13px] leading-relaxed">Click "Add Event" to schedule interviews, orientations, meetings, or training sessions. Colors automatically match category.</p></section>
-                    <section><h4 className="font-black text-[#141A26] border-b border-[#4F868C]/10 pb-2 mb-4 flex items-center gap-2 font-mono uppercase tracking-widest text-sm"><span className="bg-[#D91604] text-white w-6 h-6 rounded-full flex items-center justify-center text-[10px]">02</span> Public Holidays</h4><p className="text-[13px] leading-relaxed">Use "Add Holiday" to register company-wide leaves or national holidays. Represents with a <b>Palm Tree</b> icon.</p></section>
+                <div className="flex-1 overflow-y-auto p-6 space-y-6 text-[#3F4859]">
+                    <section>
+                        <h4 className="font-black text-[#141A26] border-b border-[#4F868C]/10 pb-2 mb-4 flex items-center gap-2 font-mono uppercase tracking-widest text-sm"><span className="bg-[#4F868C] text-white w-6 h-6 rounded-full flex items-center justify-center text-[10px]">01</span> Action Buttons</h4>
+                        <div className="space-y-3 font-medium bg-white p-4 rounded-xl border border-[#4F868C]/20 shadow-sm text-[12px]">
+                            <div className="flex items-center gap-3"><button className="bg-[#141A26] text-white px-3 py-1 rounded-xl text-[10px] font-black uppercase shadow-sm flex items-center gap-1"><Plus size={12}/> Event</button> <span>สร้างนัดหมายหรือกิจกรรมใหม่</span></div>
+                            <div className="flex items-center gap-3"><button className="bg-white border-2 border-[#141A26] text-[#141A26] px-3 py-1 rounded-xl text-[10px] font-black uppercase shadow-sm flex items-center gap-1"><Palmtree size={12}/> Holiday</button> <span>เพิ่มวันหยุดบริษัท / วันหยุดนักขัตฤกษ์</span></div>
+                            <div className="flex items-center gap-3"><div className="flex gap-1"><button className="w-6 h-6 flex items-center justify-center bg-white border border-[#4F868C]/20 rounded shadow-sm"><ChevronLeft size={12}/></button><button className="w-6 h-6 flex items-center justify-center bg-white border border-[#4F868C]/20 rounded shadow-sm"><ChevronRight size={12}/></button></div> <span>เลื่อนดูเดือนก่อนหน้า / ถัดไป</span></div>
+                            <div className="flex items-center gap-3"><button className="w-6 h-6 flex items-center justify-center bg-white text-[#F2B705] border border-[#4F868C]/20 rounded-lg shadow-sm"><Pencil size={12}/></button> <button className="w-6 h-6 flex items-center justify-center bg-white text-[#D91604] border border-[#4F868C]/20 rounded-lg shadow-sm"><Trash2 size={12}/></button> <span>แก้ไข หรือ ลบ กิจกรรม (ให้คลิกที่ชื่อกิจกรรมในปฏิทินก่อน)</span></div>
+                        </div>
+                    </section>
+                    <section><h4 className="font-black text-[#141A26] border-b border-[#4F868C]/10 pb-2 mb-4 flex items-center gap-2 font-mono uppercase tracking-widest text-sm"><span className="bg-[#F2B705] text-[#141A26] w-6 h-6 rounded-full flex items-center justify-center text-[10px]">02</span> HR Events</h4><p className="text-[13px] leading-relaxed">Click "Add Event" to schedule interviews, orientations, meetings, or training sessions. Colors automatically match category.</p></section>
+                    <section><h4 className="font-black text-[#141A26] border-b border-[#4F868C]/10 pb-2 mb-4 flex items-center gap-2 font-mono uppercase tracking-widest text-sm"><span className="bg-[#D91604] text-white w-6 h-6 rounded-full flex items-center justify-center text-[10px]">03</span> Public Holidays</h4><p className="text-[13px] leading-relaxed">Use "Add Holiday" to register company-wide leaves or national holidays. Represents with a <b>Palm Tree</b> icon.</p></section>
                 </div>
-                <div className="p-6 border-t border-[#4F868C]/10 bg-white flex justify-end">
-                    <button onClick={() => setIsGuideOpen(false)} className="px-8 py-3 bg-[#141A26] text-white rounded-xl font-black text-[11px] uppercase shadow-lg hover:bg-[#4F868C] transition-all font-mono">Close Guide</button>
+                <div className="p-4 px-6 border-t border-[#4F868C]/10 bg-white flex justify-end">
+                    <button onClick={() => setIsGuideOpen(false)} className="px-6 py-2.5 bg-[#141A26] text-white rounded-xl font-black text-[11px] uppercase shadow-lg hover:bg-[#4F868C] transition-all font-mono">Close Guide</button>
                 </div>
             </div>
         </div>
